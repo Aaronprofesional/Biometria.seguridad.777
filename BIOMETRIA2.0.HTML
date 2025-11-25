@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioSecure - Tecnologías Biométricas de Seguridad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #3949ab;
+            --light: #e8eaf6;
+            --dark: #0d1440;
+            --success: #2e7d32;
+            --warning: #f57c00;
+            --danger: #c62828;
+            --future: #ff6f00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        /* Hero Section con Imagen y Frase */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .future-phrase {
+            color: #ffeb3b;
+            font-style: italic;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav {
+            background: var(--secondary);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav li {
+            margin: 0 0.5rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav a:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            background: white;
+            margin: 3rem 0;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .technology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 6px solid var(--accent);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .tech-card h3 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .tech-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--light), #ffffff);
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid var(--light);
+        }
+
+        .tech-image i {
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .advantages, .limitations {
+            margin: 1.5rem 0;
+        }
+
+        .advantages h4, .limitations h4 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .advantages h4 {
+            color: var(--success);
+        }
+
+        .limitations h4 {
+            color: var(--danger);
+        }
+
+        .advantages ul, .limitations ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .advantages li, .limitations li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .advantages li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .limitations li::before {
+            content: '⚠';
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        .comparison-table tr:hover {
+            background: #e3f2fd;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav li {
+                margin: 0.3rem 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav a {
+                justify-content: center;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .technology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tech-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .future-phrase {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ff6f00, 0 0 30px #ff6f00;
+            }
+            to {
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff9800, 0 0 40px #ff9800;
+            }
+        }
+
+        .tech-card:nth-child(1) { animation-delay: 0.1s; }
+        .tech-card:nth-child(2) { animation-delay: 0.2s; }
+        .tech-card:nth-child(3) { animation-delay: 0.3s; }
+        .tech-card:nth-child(4) { animation-delay: 0.4s; }
+        .tech-card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1><i class="fas fa-fingerprint"></i> BioSecure</h1>
+        <p>Tecnologías Avanzadas de Autenticación Biométrica</p>
+    </header>
+
+    <!-- Hero Section con Imagen y Frase -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="future-phrase">"EL FUTURO ES HOY OÍSTE VIEJO"</h2>
+                <p>La biometría está revolucionando la seguridad digital hoy mismo</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://image.shutterstock.com/image-vector/finance-chart-biometric-security-icon-260nw-2688526301.jpg" 
+                     alt="Tecnología biométrica del futuro" 
+                     class="hero-img"
+                     onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul>
+            <li><a href="#verificacion-voz"><i class="fas fa-microphone"></i> Verificación de Voz</a></li>
+            <li><a href="#reconocimiento-venas"><i class="fas fa-hand-paper"></i> Reconocimiento de Venas</a></li>
+            <li><a href="#iris-retina"><i class="fas fa-eye"></i> Iris/Retina</a></li>
+            <li><a href="#reconocimiento-facial"><i class="fas fa-user"></i> Reconocimiento Facial</a></li>
+            <li><a href="#huellas-dactilares"><i class="fas fa-fingerprint"></i> Huellas Dactilares</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introducción -->
+        <section class="section">
+            <h2><i class="fas fa-shield-alt"></i> ¿Qué es la Biometría?</h2>
+            <p>La biometría se refiere a las tecnologías que miden y analizan las características físicas y de comportamiento humanas para la autenticación e identificación. Estas tecnologías ofrecen niveles de seguridad superiores a los métodos tradicionales como contraseñas o tarjetas.</p>
+        </section>
+
+        <!-- Tecnologías Biométricas -->
+        <section class="section">
+            <h2><i class="fas fa-cogs"></i> Tecnologías Biométricas</h2>
+            <div class="technology-grid">
+                
+                <!-- Verificación de Voz -->
+                <div class="tech-card" id="verificacion-voz">
+                    <div class="tech-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3>Verificación de Voz</h3>
+                    <div class="tech-image">
+                        <i class="fas fa-waveform"></i>
+                    </div>
+                    <p>Analiza las características únicas de la voz de una persona para verificar su identidad mediante patrones de habla y frecuencia.</p>
+                    <div class="advantages">
+                        <h4><i class="fas fa-check-circle"></i> Ventajas:</h4>
+                        <ul>
+                            <li>No requiere hardware especializado</li>
+                            <li>Fácil implementación telefónica</li>
+                            <li>Barrera baja de adopción</li>
+                            <li>Autenticación remota</li>
+                        </ul>
+                    </div>
+                    <div class="limitations">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Limitaciones:</h4>
+                        <ul>
+                            <li>Sensible al ruido ambiental</li>
+                            <li>Puede verse afectada por resfriados</li>
+                            <li>Preocupaciones de privacidad</li>
+                            <li>Posibles imitaciones de voz</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Reconocimiento de Venas -->
+                <div class="tech-card" id="reconocimiento-venas">
+                    <div class="tech-icon">
+                        <i class="fas fa-hand-holding-medical"></i>
+                    </div>
+                    <h3>Reconocimiento de Venas</h3>
+                    <div class="tech-image">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <p>Utiliza patrones únicos de venas en manos o dedos para identificación mediante tecnología infrarroja.</p>
+                    <div class="advantages">
+                        <h4><i class="fas fa-check-circle"></i> Ventajas:</h4>
+                        <ul>
+                            <li>Muy difícil de falsificar</li>
+                            <li>No deja "huellas" biométricas</li>
+                            <li>Alta precisión y seguridad</li>
+                            <li>Contacto no necesario</li>
+                        </ul>
+                    </div>
+                    <div class="limitations">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Limitaciones:</h4>
+                        <ul>
+                            <li>Equipo especializado requerido</li>
+                            <li>Posibles cambios con edad</li>
+                            <li>Costo más elevado</li>
+                            <li>Limitada adopción</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Iris/Retina -->
+                <div class="tech-card" id="iris-retina">
+                    <div class="tech-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Reconocimiento de Iris/Retina</h3>
+                    <div class="tech-image">
+                        <i class="fas fa-dot-circle"></i>
+                    </div>
+                    <p>Analiza patrones únicos en el iris o los vasos sanguíneos de la retina con tecnología de escaneo ocular.</p>
+                    <div class="advantages">
+                        <h4><i class="fas fa-check-circle"></i> Ventajas:</h4>
+                        <ul>
+                            <li>Extremadamente preciso</li>
+                            <li>Estable durante toda la vida</li>
+                            <li>Difícil de engañar</li>
+                            <li>Baja tasa de error</li>
+                        </ul>
+                    </div>
+                    <div class="limitations">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Limitaciones:</h4>
+                        <ul>
+                            <li>Equipo costoso</li>
+                            <li>Problemas con lentes de contacto</li>
+                            <li>Preocupaciones de salud ocular</li>
+                            <li>Invasivo para algunos usuarios</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Reconocimiento Facial -->
+                <div class="tech-card" id="reconocimiento-facial">
+                    <div class="tech-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Reconocimiento Facial</h3>
+                    <div class="tech-image">
+                        <i class="fas fa-id-card-alt"></i>
+                    </div>
+                    <p>Identifica personas analizando características faciales únicas mediante algoritmos de IA y machine learning.</p>
+                    <div class="advantages">
+                        <h4><i class="fas fa-check-circle"></i> Ventajas:</h4>
+                        <ul>
+                            <li>No intrusivo</li>
+                            <li>Fácil de implementar</li>
+                            <li>Ampliamente adoptado</li>
+                            <li>Escalable</li>
+                        </ul>
+                    </div>
+                    <div class="limitations">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Limitaciones:</h4>
+                        <ul>
+                            <li>Afectado por cambios de luz</li>
+                            <li>Preocupaciones de privacidad</li>
+                            <li>Sesgos algorítmicos posibles</li>
+                            <li>Cambios con edad/maquillaje</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Huellas Dactilares -->
+                <div class="tech-card" id="huellas-dactilares">
+                    <div class="tech-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3>Huellas Dactilares</h3>
+                    <div class="tech-image">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <p>Utiliza patrones únicos de crestas y valles en los dedos mediante sensores ópticos, capacitivos o ultrasónicos.</p>
+                    <div class="advantages">
+                        <h4><i class="fas fa-check-circle"></i> Ventajas:</h4>
+                        <ul>
+                            <li>Tecnología madura</li>
+                            <li>Bajo costo</li>
+                            <li>Ampliamente aceptada</li>
+                            <li>Rápida verificación</li>
+                        </ul>
+                    </div>
+                    <div class="limitations">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Limitaciones:</h4>
+                        <ul>
+                            <li>Problemas con dedos dañados</li>
+                            <li>Posibles huellas falsas</li>
+                            <li>Preocupaciones de higiene</li>
+                            <li>Requiere contacto físico</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparativa -->
+        <section class="section">
+            <h2><i class="fas fa-balance-scale"></i> Comparativa de Tecnologías</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tecnología</th>
+                        <th>Precisión</th>
+                        <th>Costo</th>
+                        <th>Facilidad de Uso</th>
+                        <th>Nivel de Seguridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Verificación de Voz</td>
+                        <td>Media</td>
+                        <td>Bajo</td>
+                        <td>Alta</td>
+                        <td>Media</td>
+                    </tr>
+                    <tr>
+                        <td>Reconocimiento de Venas</td>
+                        <td>Muy Alta</td>
+                        <td>Alto</td>
+                        <td>Media</td>
+                        <td>Muy Alto</td>
+                    </tr>
+                    <tr>
+                        <td>Iris/Retina</td>
+                        <td>Excelente</td>
+                        <td>Alto</td>
+                        <td>Baja</td>
+                        <td>Excelente</td>
+                    </tr>
+                    <tr>
+                        <td>Reconocimiento Facial</td>
+                        <td>Alta</td>
+                        <td>Medio</td>
+                        <td>Alta</td>
+                        <td>Alta</td>
+                    </tr>
+                    <tr>
+                        <td>Huellas Dactilares</td>
+                        <td>Alta</td>
+                        <td>Bajo</td>
+                        <td>Alta</td>
+                        <td>Alta</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3><i class="fas fa-shield-alt"></i> BioSecure</h3>
+            <p>Tecnologías de Autenticación Avanzada para un Mundo más Seguro</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-envelope"></i> Contacto</a>
+                <a href="#"><i class="fas fa-info-circle"></i> Acerca de</a>
+                <a href="#"><i class="fas fa-lock"></i> Privacidad</a>
+                <a href="#"><i class="fas fa-file-contract"></i> Términos</a>
+            </div>
+            <p>&copy; 2024 BioSecure - Todos los derechos reservados</p>
+        </div>
+    </footer>
+</body>
+</html>
